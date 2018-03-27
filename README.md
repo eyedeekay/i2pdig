@@ -3,11 +3,11 @@
 Lookup an i2p hostname, base32, and base64 from the terminal with a user-defined jump service.
 
 This is a simple program which requests a hostname from any existing i2p jump
-service(but it's using my selfhosted one by default for now, that may change, I
-just didn't want to annoy anybody by overusing theirs, and instead of following
-the redirect parses the addresshelper URL, derives the base32 address from the
-base64 address, and outputs them all to the terminal. Sort of like a standalone
-dns resolution program, but for i2p jump hosts.
+service(but it's **using my selfhosted one by default for now**, that may
+change, I just didn't want to annoy anybody by overusing theirs, and instead of
+following the redirect parses the addresshelper URL, derives the base32 address
+from the base64 address, and outputs them all to the terminal. Sort of like a
+standalone dns resolution program, but for i2p jump hosts.
 
 As an added bonus, you can also do this:
 
@@ -44,7 +44,7 @@ the executable into your path. This is a command-prompt program, so you'll have
 to open cmd.exe, then
 
         dir path\to\unzipped\
-        ./bin/i2pdig.exe
+        ./bin/i2pdig.exe -url=i2pforum.i2p
 
 Also, there are .debs, or you can make your own with
 
