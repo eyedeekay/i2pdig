@@ -11,12 +11,13 @@ dns resolution program, but for i2p jump hosts.
 
 As an added bonus, you can also do this:
 
-        . <(./bin/i2pdig -url 333.i2p)
+        . <(./bin/i2pdig -url i2pforum.i2p)
         echo "        $base32" | tee -a README.md
         http_proxy="http://127.0.0.1:4444" surf "http://$base32"
 
+
 and get the output:
 
-        ctvfe2fimcsdfxmzmd42brnbf7ceenwrbroyjx3wzah5eudjyyza.b32.i2p
+        tmipbl5d7ctnz3cib4yd2yivlrssrtpmuuzyqdpqkelzmnqllhda.b32.i2p
 
 and also automatically launch your web browser.
