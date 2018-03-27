@@ -151,24 +151,6 @@ checkinstall: build-native
 		--deldesc=yes \
 		--backup=no
 
-checkinstall-arm: build-linux-arm
-	UARCH="arm"; \
-	rm -f ./bin/i2pdig_$(VERSION)-1_$(UARCH).deb; \
-	checkinstall --install=no \
-		--fstrans=yes \
-		--default \
-		--pkgname="i2pdig" \
-		--pkgversion="$(VERSION)" \
-		--arch="$(UARCH)" \
-		--pkglicense=mit \
-		--pkggroup=net \
-		--pakdir=./bin/ \
-		--nodoc \
-		--strip=yes \
-		--deldoc=yes \
-		--deldesc=yes \
-		--backup=no
-
 release: gofmt all checkinstall checkinstall-arm
 
 test: build-linux
