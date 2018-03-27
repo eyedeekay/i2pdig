@@ -1,9 +1,9 @@
 package main
 
 import (
-    "crypto/sha256"
-    "encoding/base32"
-    "encoding/base64"
+	"crypto/sha256"
+	"encoding/base32"
+	"encoding/base64"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -51,20 +51,20 @@ func (d *digger) run() {
 	if location := string(resp.Header.Get("Location")); location != "" {
 		contents := strings.SplitN(location, "=", 2)
 		if len(contents) == 2 {
-			hostname := strings.Replace(strings.Replace(strings.Replace(contents[0], "http://","", -1),"?i2paddresshelper","",-1), "/","",-1)
-			b64 := contents[1] //
-            raw64, err := base64.NewEncoding("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-~").DecodeString(b64)//.DecodeString(b64)
-            if Error(err, "i2pdig.go Base64 Conversion", string(raw64)){
-                hash := sha256.New()
-                _, err := hash.Write([]byte(raw64))//sha256.Sum256(raw64)
-                if Error(err, "i2pdig.go Base32 Conversion"){
-                    b32 := strings.ToLower(strings.Replace(base32.StdEncoding.EncodeToString(hash.Sum(nil)), "=", "", -1)) + ".b32.i2p"
-                    os.Stderr.WriteString("#i2p Address information for: "+ hostname)
-                    fmt.Println("host=\""+hostname+"\"")
-                    fmt.Println("base32=\""+b32+"\"")
-                    fmt.Println("base64=\""+b64+"\"")
-                }
-            }
+			hostname := strings.Replace(strings.Replace(strings.Replace(contents[0], "http://", "", -1), "?i2paddresshelper", "", -1), "/", "", -1)
+			b64 := contents[1]                                                                                                     //
+			raw64, err := base64.NewEncoding("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-~").DecodeString(b64) //.DecodeString(b64)
+			if Error(err, "i2pdig.go Base64 Conversion", string(raw64)) {
+				hash := sha256.New()
+				_, err := hash.Write([]byte(raw64)) //sha256.Sum256(raw64)
+				if Error(err, "i2pdig.go Base32 Conversion") {
+					b32 := strings.ToLower(strings.Replace(base32.StdEncoding.EncodeToString(hash.Sum(nil)), "=", "", -1)) + ".b32.i2p"
+					os.Stderr.WriteString("#i2p Address information for: " + hostname)
+					fmt.Println("host=\"" + hostname + "\"")
+					fmt.Println("base32=\"" + b32 + "\"")
+					fmt.Println("base64=\"" + b64 + "\"")
+				}
+			}
 		} else {
 			Log("i2pdig.go Malformed response from jump service.")
 		}
@@ -157,21 +157,21 @@ func main() {
 
 func Log(inp ...string) bool {
 	if verbose {
-        for _, i := range inp {
-            os.Stderr.WriteString(i)
-        }
+		for _, i := range inp {
+			os.Stderr.WriteString(i)
+		}
 	}
-    return true
+	return true
 }
 
 func Error(err error, inp ...string) bool {
 	if verbose {
 		for _, i := range inp {
-            os.Stderr.WriteString(i)
-        }
+			os.Stderr.WriteString(i)
+		}
 	}
 	if err != nil {
-        log.Println(inp)
+		log.Println(inp)
 		log.Fatal(err)
 		return false
 	}

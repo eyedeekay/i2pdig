@@ -21,3 +21,33 @@ and get the output:
         tmipbl5d7ctnz3cib4yd2yivlrssrtpmuuzyqdpqkelzmnqllhda.b32.i2p
 
 and also automatically launch your web browser.
+
+## Installation:
+
+For convenience's sake, the binaries are included in this repository and the
+tarball/zip that you can download from Github. In order to install this on most
+Unix-Like systems, you can just use:
+
+        make install
+
+or copy the appropriate binary from the bin/ folder for your platform into your
+path, or just run it directly from the folder. I built it for a buttload of
+platforms because I have a LEDE router that can also run i2pd, who knows what
+anybody else has. On that note,
+
+        make native
+
+will attempt to build it for whatever the running platform is.
+
+On Windows, you can just run it from the bin/ folder in the zip, or you can copy
+the executable into your path. This is a command-prompt program, so you'll have
+to open cmd.exe, then
+
+        dir path\to\unzipped\
+        ./bin/i2pdig.exe
+
+Also, there are .debs, or you can make your own with
+
+        make checkinstall
+
+which just runs a pre-configured checkinstall command to generate a deb.
