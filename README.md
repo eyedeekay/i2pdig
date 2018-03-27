@@ -50,4 +50,8 @@ Also, there are .debs, or you can make your own with
 
         make checkinstall
 
-which just runs a pre-configured checkinstall command to generate a deb.
+which just runs a pre-configured checkinstall command to generate a deb. To
+cross-compile a .deb for a different architecture,
+
+        export UARCH=$(your-architecture)
+        make checkinstall

@@ -151,7 +151,7 @@ checkinstall: build-native
 		--deldesc=yes \
 		--backup=no
 
-release: gofmt all checkinstall checkinstall-arm
+release: gofmt all checkinstall
 
 test: build-linux
 	./bin/i2pdig -url=i2pforum.i2p
