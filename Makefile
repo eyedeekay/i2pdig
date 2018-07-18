@@ -1,11 +1,16 @@
 
+GOPATH=$(PWD)/.go
+
 UNAME ?= $(shell uname -s | tr '[:upper:]' '[:lower:]')
 UARCH ?= $(shell uname -m | tr '[:upper:]' '[:lower:]' | sed 's|x86_64|amd64|g')
 
 VERSION := 1.0
 
 dummy:
-	echo "$(UNAME)$(UARCH)"
+	echo "$(UNAME) $(UARCH)"
+
+deps:
+	go get -u github.com/cryptix/goSam
 
 install:
 	install -m755 ./bin/i2pdig-$(UNAME)$(UARCH) /usr/bin/i2pdig
@@ -134,7 +139,7 @@ build-bsd-all: build-freebsd build-dragonfly build-netbsd build-openbsd
 
 all: build-linux-all build-consumeros-all build-bsd-all
 
-checkinstall: build-native
+checkinstall:
 	rm -f ./bin/i2pdig_$(VERSION)-1_$(UARCH).deb
 	checkinstall --install=no \
 		--fstrans=yes \
@@ -150,6 +155,7 @@ checkinstall: build-native
 		--deldoc=yes \
 		--deldesc=yes \
 		--backup=no
+	cp ./bin/i2pdig_$(VERSION)-1_$(UARCH).deb ../
 
 release: gofmt all checkinstall
 

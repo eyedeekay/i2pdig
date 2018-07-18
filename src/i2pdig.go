@@ -29,6 +29,7 @@ type digger struct {
 	result []byte
 
 	err error
+    debug bool
 }
 
 func (d *digger) mkUrl() string {
@@ -73,7 +74,7 @@ func (d *digger) run() {
 	}
 }
 
-func newDigger(samaddr, address, jump string) *digger {
+func newDigger(samaddr, address, jump string, debug bool) *digger {
 	var d digger
 	d.address = strings.TrimRight(address, "/")
 	Log("i2pdig.go URL:", d.address)
@@ -81,7 +82,7 @@ func newDigger(samaddr, address, jump string) *digger {
 	Log("i2pdig.go SAM connection:", d.samaddr)
 	d.jump = strings.TrimRight(jump, "/")
 	Log("i2pdig.go Jump Service:", d.jump)
-	d.samclient, d.err = goSam.NewClient(samaddr)
+	d.samclient, d.err = goSam.NewClientFromOptions(goSam.SetAddr(samaddr), goSam.SetDebug(debug))
 	Log("i2pdig.go Setting up transports")
 	d.transport = &http.Transport{
 		Dial: d.samclient.Dial,
@@ -140,7 +141,6 @@ func main() {
 		}
 	}
 	samaddr = samhost + ":" + samport
-	goSam.ConnDebug = *debugConnection
 	if output == "" {
 		log.SetOutput(os.Stdout)
 	} else {
@@ -151,7 +151,7 @@ func main() {
 		log.SetOutput(file)
 	}
 	verbose = *verboseLogging
-	shovel := newDigger(samaddr, address, jump)
+	shovel := newDigger(samaddr, address, jump, *debugConnection)
 	shovel.run()
 }
 

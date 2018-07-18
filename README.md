@@ -2,6 +2,10 @@
 
 Lookup an i2p hostname, base32, and base64 from the terminal with a user-defined jump service.
 
+## travis
+
+[![Build Status](https://travis-ci.org/eyedeekay/i2pdig.svg?branch=master)](https://travis-ci.org/eyedeekay/i2pdig)
+
 This is a simple program which requests a hostname from any existing i2p jump
 service(but it's **using my selfhosted one by default for now**, that may
 change, I just didn't want to annoy anybody by overusing theirs, and instead of
