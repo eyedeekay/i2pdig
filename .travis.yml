@@ -23,5 +23,5 @@ install:
         sleep 10;
     make build-all ; else
         sudo service i2pd start; sleep 10;
-        make deps build-all test ;
+        make deps test ;
     sudo service i2pd stop; fi
