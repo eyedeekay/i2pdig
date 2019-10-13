@@ -1,6 +1,4 @@
 
-GOPATH=$(PWD)/.go
-
 UNAME ?= $(shell uname -s | tr '[:upper:]' '[:lower:]')
 UARCH ?= $(shell uname -m | tr '[:upper:]' '[:lower:]' | sed 's|x86_64|amd64|g')
 
@@ -24,7 +22,7 @@ build-native:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-"$(UNAME)$(UARCH)" \
-		./src
+		./i2pdig
 	cp bin/i2pdig-"$(UNAME)$(UARCH)" bin/i2pdig
 
 build-linux:
@@ -33,7 +31,7 @@ build-linux:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxamd64 \
-		./src
+		./i2pdig
 
 build-linux-amd64:
 	GOOS=linux GOARCH=amd64 go build \
@@ -41,7 +39,7 @@ build-linux-amd64:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxamd64 \
-		./src
+		./i2pdig
 
 build-linux-arm:
 	GOOS=linux GOARCH=arm go build \
@@ -49,7 +47,7 @@ build-linux-arm:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxarm \
-		./src
+		./i2pdig
 
 build-linux-mips:
 	GOOS=linux GOARCH=mips go build \
@@ -57,7 +55,7 @@ build-linux-mips:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxmips \
-		./src
+		./i2pdig
 
 build-linux-mipsle:
 	GOOS=linux GOARCH=mipsle go build \
@@ -65,7 +63,7 @@ build-linux-mipsle:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxmipsle \
-		./src
+		./i2pdig
 
 build-linux-mips64:
 	GOOS=linux GOARCH=mips64 go build \
@@ -73,7 +71,7 @@ build-linux-mips64:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxmips64 \
-		./src
+		./i2pdig
 
 build-linux-mips64le:
 	GOOS=linux GOARCH=mips64le go build \
@@ -81,7 +79,7 @@ build-linux-mips64le:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig-linuxmips64le \
-		./src
+		./i2pdig
 
 build-linux-all: build-linux build-linux-arm build-linux-mips build-linux-mipsle build-linux-mips64 build-linux-mips64le
 
@@ -91,7 +89,7 @@ build-windows:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig.exe \
-		./src
+		./i2pdig
 
 build-osx:
 	GOOS=darwin GOARCH=amd64 go build \
@@ -99,7 +97,7 @@ build-osx:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig.bin \
-		./src
+		./i2pdig
 
 build-consumeros-all: build-windows build-osx
 
@@ -109,7 +107,7 @@ build-freebsd:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig.freebsd \
-		./src
+		./i2pdig
 
 build-dragonfly:
 	GOOS=dragonfly GOARCH=amd64 go build \
@@ -117,7 +115,7 @@ build-dragonfly:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig.dragonflybsd \
-		./src
+		./i2pdig
 
 build-netbsd:
 	GOOS=netbsd GOARCH=amd64 go build \
@@ -125,7 +123,7 @@ build-netbsd:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig.netbsd \
-		./src
+		./i2pdig
 
 build-openbsd:
 	GOOS=openbsd GOARCH=amd64 go build \
@@ -133,7 +131,7 @@ build-openbsd:
 		-tags netgo \
 		-ldflags '-w -extldflags "-static"' \
 		-o bin/i2pdig.openbsd \
-		./src
+		./i2pdig
 
 build-bsd-all: build-freebsd build-dragonfly build-netbsd build-openbsd
 
@@ -163,4 +161,4 @@ test: build-linux
 	./bin/i2pdig -url=i2pforum.i2p
 
 gofmt:
-	gofmt -w src/*.go
+	gofmt -w i2pdig/*.go
